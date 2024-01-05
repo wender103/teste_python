@@ -47,7 +47,8 @@ function enviarComando() {
     comando.Musica = comandoTexto;
 
     // Enviar solicitação ao servidor
-    fetch(`http://${location.hostname}:8000/open_spotify`, {
+    //http://${location.hostname}:8000/open_spotify
+    fetch(`https://ligar-pc-remotamente.onrender.com/open_spotify`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -61,7 +62,8 @@ function enviarComando() {
 
 function ligarPC() {
     // Enviar solicitação ao servidor para ligar o PC
-    fetch(`http://${location.hostname}:8000/ligar_pc`, {
+    //http://${location.hostname}:8000/ligar_pc
+    fetch(`https://ligar-pc-remotamente.onrender.com/ligar_pc`, {
         method: 'GET',
     })
     .then(response => {
