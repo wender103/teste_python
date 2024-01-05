@@ -17,6 +17,19 @@ class MyRequestHandler(http.server.SimpleHTTPRequestHandler):
 
             response_data = {"status": "success", "message": "Conexão estabelecida"}
             self.wfile.write(json.dumps(response_data).encode())
+        elif self.path == '/desligar_pc':
+            # Adicionar cabeçalhos CORS
+            self.send_response(200)
+            self.send_header("Content-type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")  # Isso permite qualquer origem
+            self.end_headers()
+
+            # Lógica para desligar o PC
+            command = "shutdown /s /t 1"  # Comando para desligar o PC no Windows
+            subprocess.Popen(command, shell=True)
+
+            response_data = {"status": "success", "message": "Desligando o PC"}
+            self.wfile.write(json.dumps(response_data).encode())
         else:
             # Servir arquivos estáticos
             super().do_GET()
