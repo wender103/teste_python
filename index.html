@@ -13,8 +13,8 @@
             // Endereço MAC do seu PC
             const macAddress = 'AC-22-0B-2E-13-5C';
 
-            // Envia uma solicitação HTTP para o servidor
-            fetch('https://10.204.51.157:5000/wake-on-lan', {
+            // Envia uma solicitação HTTPS para o servidor
+            fetch('https://10.204.51.157:5000/wake-on-lan', {  // Altere para HTTPS
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
