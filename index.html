@@ -2,34 +2,15 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wake-on-LAN</title>
+    <title>Abrir Spotify</title>
 </head>
 <body>
-    <button id="wakeBtn">Ligar PC</button>
+    <textarea id="comandoSpotify" cols="30" rows="10" placeholder="Digite o que deseja e seu pc fará!"></textarea>
+    <button id="btnSpotify">Abrir Spotify</button>
+    <button id="btnLigarPC">Ligar PC</button>
 
-    <script>
-        document.getElementById('wakeBtn').addEventListener('click', function() {
-            // Endereço MAC do seu PC
-            const macAddress = 'AC-22-0B-2E-13-5C';
-
-            // Envia uma solicitação HTTPS para o servidor
-            fetch('https://ligar-pc-remotamente.onrender.com/wake-on-lan', {  // Altere para HTTPS
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    mac_address: macAddress,
-                }),
-            })
-            .then(response => response.text())
-            .then(message => {
-                console.log(message);
-                // Adicione aqui o que você quer fazer com a resposta do servidor
-            })
-            .catch(error => console.error('Erro:', error));
-        });
-    </script>
+    <script src="Assets/Js/enviar_comandos.js"></script>
 </body>
 </html>

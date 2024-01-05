@@ -47,7 +47,6 @@ function enviarComando() {
     comando.Musica = comandoTexto;
 
     // Enviar solicitação ao servidor
-    //http://${location.hostname}:8000/open_spotify
     fetch(`http://${location.hostname}:8000/open_spotify`, {
         method: 'POST',
         headers: {
@@ -62,7 +61,6 @@ function enviarComando() {
 
 function ligarPC() {
     // Enviar solicitação ao servidor para ligar o PC
-    //http://${location.hostname}:8000/ligar_pc
     fetch(`http://${location.hostname}:8000/ligar_pc`, {
         method: 'GET',
     })
@@ -72,22 +70,6 @@ function ligarPC() {
         }
         // Não tentar analisar JSON aqui, pois a resposta é vazia
         console.log("Solicitação para ligar o PC enviada com sucesso!");
-    })
-    .catch(error => console.error(error));
-}
-
-function desligarPC() {
-    // Enviar solicitação ao servidor para desligar o PC
-    // http://${location.hostname}:8000/desligar_pc
-    fetch(`http://${location.hostname}:8000/desligar_pc`, {
-        method: 'GET',
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Erro ao enviar solicitação para desligar o PC: ${response.statusText}`);
-        }
-        // Não tentar analisar JSON aqui, pois a resposta é vazia
-        console.log("Solicitação para desligar o PC enviada com sucesso!");
     })
     .catch(error => console.error(error));
 }
