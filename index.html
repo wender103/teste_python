@@ -2,17 +2,34 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abrir Spotify</title>
+    <title>Wake-on-LAN</title>
 </head>
 <body>
-    <textarea id="comandoSpotify" cols="30" rows="10" placeholder="Digite o que deseja e seu pc fará!"></textarea>
-    <button id="btnSpotify">Abrir Spotify</button>
-    <button onclick="ligarPC()">Ligar PC</button>
-    <button onclick="desligarPC()">Desligar PC</button>
+    <button id="wakeBtn">Ligar PC</button>
 
-    <script src="Assets/Js/ligarPC.js"></script>
-    <script src="Assets/Js/enviar_comandos.js"></script>
+    <script>
+        document.getElementById('wakeBtn').addEventListener('click', function() {
+            // Endereço MAC do seu PC
+            const macAddress = 'AC-22-0B-2E-13-5C';
+
+            // Envia uma solicitação HTTP para o servidor
+            fetch('http://seu-servidor:5000/wake-on-lan', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    mac_address: macAddress,
+                }),
+            })
+            .then(response => response.text())
+            .then(message => {
+                console.log(message);
+                // Adicione aqui o que você quer fazer com a resposta do servidor
+            })
+            .catch(error => console.error('Erro:', error));
+        });
+    </script>
 </body>
 </html>
