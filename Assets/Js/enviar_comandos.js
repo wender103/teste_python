@@ -1,55 +1,30 @@
-document.getElementById("btnSpotify").addEventListener("click", function() {
-    enviarComando();
-});
+document.getElementById("btnSpotify").addEventListener("click", enviarComando);
 
-document.getElementById("btnLigarPC").addEventListener("click", function() {
-    ligarPC();
-});
+document.getElementById("btnLigarPC").addEventListener("click", ligarPC);
 
 document.addEventListener('keypress', (e) => {
-    let KeyPress = e.keyCode
-    if (KeyPress == 13) {
+    if (e.keyCode === 13) {
         enviarComando();
     }
-})
+});
 
 comandoSpotify.addEventListener('keypress', (e) => {
-    let KeyPress = e.keyCode
-    if (KeyPress == 13) {
+    if (e.keyCode === 13) {
         enviarComando();
     }
-})
+});
 
 function enviarComando() {
-    // Obter o conteúdo do textarea
-    const comandoTexto = document.getElementById("comandoSpotify").value;
-
-    // Interpretar o texto e criar o objeto JSON
+    const comandoTexto = document.getElementById("comandoSpotify").value.toLowerCase();
+    
     const comando = {
-        Comando: "",
-        Programa: "",
-        Tocar: false,
-        Musica: ""
+        Comando: comandoTexto.includes("abrir") ? "Abrir" : "",
+        Programa: comandoTexto.includes("spotify") ? "Spotify" : "",
+        Tocar: comandoTexto.includes("toque") || comandoTexto.includes("tocar"),
+        Musica: comandoTexto
     };
 
-    if (comandoTexto.toLowerCase().includes("abrir") || comandoTexto.toLowerCase().includes("abra")) {
-        comando.Comando = "Abrir";
-    }
-
-    if (comandoTexto.toLowerCase().includes("spotify")) {
-        comando.Programa = "Spotify";
-    }
-
-    if (comandoTexto.toLowerCase().includes("toque") || comandoTexto.toLowerCase().includes("tocar")) {
-        comando.Tocar = true;
-    }
-
-    comando.Musica = comandoTexto;
-
-    // Enviar solicitação ao servidor
-    //http://${location.hostname}:8000
-    fetch(`https://ligar-pc-remotamente.onrender.com/open_spotify
-    `, {
+    fetch("https://ligar-pc-remotamente.onrender.com/open_spotify", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -62,15 +37,13 @@ function enviarComando() {
 }
 
 function ligarPC() {
-    // Enviar solicitação ao servidor para ligar o PC
-    fetch(`https://ligar-pc-remotamente.onrender.com/ligar_pc`, {
+    fetch("https://ligar-pc-remotamente.onrender.com/ligar_pc", {
         method: 'GET',
     })
     .then(response => {
         if (!response.ok) {
             throw new Error(`Erro ao enviar solicitação para ligar o PC: ${response.statusText}`);
         }
-        // Não tentar analisar JSON aqui, pois a resposta é vazia
         console.log("Solicitação para ligar o PC enviada com sucesso!");
     })
     .catch(error => console.error(error));
