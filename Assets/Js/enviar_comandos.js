@@ -48,8 +48,7 @@ function enviarComando() {
 
     // Enviar solicitação ao servidor
     //http://${location.hostname}:8000
-    fetch(`https://ligar-pc-remotamente.onrender.com/open_spotify
-    `, {
+    fetch(`https://ligar-pc-remotamente.onrender.com/open_spotify`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

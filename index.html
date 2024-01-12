@@ -2,15 +2,20 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abrir Spotify</title>
+    <title>Controle Remoto</title>
 </head>
 <body>
-    <textarea id="comandoSpotify" cols="30" rows="10" placeholder="Digite o que deseja e seu pc fará!"></textarea>
-    <button id="btnSpotify">Abrir Spotify</button>
-    <button id="btnLigarPC">Ligar PC</button>
+    <button id="ligarBtn">Ligar Computador</button>
 
-    <script src="Assets/Js/enviar_comandos.js"></script>
+    <script>
+        document.getElementById('ligarBtn').addEventListener('click', function() {
+            // Enviar solicitação para ligar o computador
+            fetch('/ligar', { method: 'POST' })
+                .then(response => response.text())
+                .then(message => alert(message))
+                .catch(error => console.error('Erro:', error));
+        });
+    </script>
 </body>
 </html>
